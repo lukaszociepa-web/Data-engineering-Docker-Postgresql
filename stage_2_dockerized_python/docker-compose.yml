@@ -1,0 +1,24 @@
+services:
+  postgres:
+    image: postgres:18
+    
+    container_name: postgres_zoomcamp_stage2
+
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: ny_taxi
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - postgres_data_stage2:/var/lib/postgresql
+
+  ingest:
+    build: .
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data_stage2:
