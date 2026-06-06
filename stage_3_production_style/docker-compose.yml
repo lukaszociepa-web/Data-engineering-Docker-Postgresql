@@ -15,6 +15,19 @@ services:
     volumes:
       - postgres_data_stage3:/var/lib/postgresql
 
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_zoomcamp_stage3
+
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    volumes:
+      - pgadmin_data_stage3:/var/lib/pgadmin
+    ports:
+      - "8085:80"
+   
+
   ingest:
     build: .
     depends_on:
@@ -31,3 +44,4 @@ services:
 
 volumes:
   postgres_data_stage3:
+  pgadmin_data_stage3:
